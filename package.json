@@ -1,6 +1,6 @@
 {
   "name": "react-openfin-scripts",
-  "version": "0.20.19-beta",
+  "version": "0.20.26-beta",
   "description": "Configuration and scripts for Openfin React App.",
   "scripts": {
     "release-staging": "npm publish . --registry=https://albertli.ddns.net:9004/repository/npm-private/"
@@ -23,7 +23,7 @@
     "@svgr/webpack": "4.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
-    "babel-jest": "23.6.0",
+    "babel-jest": "^24.7.1",
     "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.1",
     "babel-preset-react-app": "^7.0.2",
@@ -49,7 +49,7 @@
     "hadouken-js-adapter": "^0.39.1",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
-    "jest": "23.6.0",
+    "jest": "24.5.0",
     "jest-environment-jsdom": "^24.5.0",
     "jest-environment-jsdom-global": "^1.2.0",
     "jest-pnp-resolver": "1.0.2",

@@ -1,3 +1,7 @@
+const path = require('path');
+const fs = require('fs');
+const appDirectory = fs.realpathSync(process.cwd());
+
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate HoC receive the t function as a prop
     withTranslation: () => Component => {
@@ -13,4 +17,5 @@ jest.mock('react-i18next', () => ({
     }
 }));
 
-jest.mock('../../src/i18n');
+
+jest.mock(path.resolve(appDirectory, 'src/i18n'));

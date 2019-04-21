@@ -9,7 +9,7 @@
 'use strict';
 
 const fs = require('fs');
-const chalk = require('react-dev-utils/chalk');
+const chalk = require('chalk');
 const paths = require('../../config/paths');
 const modules = require('../../config/modules');
 
@@ -24,23 +24,38 @@ module.exports = (resolve, rootDir, isEjecting) => {
         : undefined;
 
     const config = {
-        collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
+        collectCoverageFrom: [
+            'src/**/*.{js,jsx,ts,tsx}',
+            '!src/**/*.d.ts',
+            "!src/serviceWorker.js",
+            "!src/i18n.ts",
+            "!src/index.tsx"
+        ],
 
         setupFiles: [
             isEjecting
                 ? 'react-app-polyfill/jsdom'
                 : require.resolve('react-app-polyfill/jsdom'),
+            require.resolve('../../config/jest/setupTests.js'),
+            require.resolve('../../config/jest/jestMockUps.js'),
         ],
-
-        setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
+        // feel like jest complains about the setupFilesAfterEnv
+        // setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
         testMatch: [
             '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
             '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}',
         ],
-        testEnvironment: 'jest-environment-jsdom-fourteen',
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ],
+        "roots": [
+            "<rootDir>/src"
+        ],
+        "globals": {},
+        testEnvironment: 'jest-environment-jsdom-global',
         transform: {
             '^.+\\.(js|jsx|ts|tsx)$': isEjecting
-                ? '<rootDir>/node_modules/babel-jest'
+                ? '<rootDir>/node_modules/ts-jest'
                 : resolve('config/jest/babelTransform.js'),
             '^.+\\.css$': resolve('config/jest/cssTransform.js'),
             '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve(
