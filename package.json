@@ -1,0 +1,41 @@
+{
+  "name": "react-openfin-scripts",
+  "version": "0.20.10",
+  "description": "Configuration and scripts for Openfin React App.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=8.10"
+  },
+  "files": [
+    "bin",
+    "config",
+    "scripts"
+  ],
+  "bin": {
+    "react-scripts": "./bin/react-openfin-scripts.js"
+  },
+  "dependencies": {
+    "chalk": "2.4.2",
+    "dotenv": "6.0.0",
+    "dotenv-expand": "4.2.0",
+    "express": "^4.16.4",
+    "hadouken-js-adapter": "^0.39.1",
+    "morgan": "^1.9.0",
+    "rimraf": "^2.6.2",
+    "shelljs": "^0.8.3",
+    "tcp-port-used": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@albertli.ddns.net:open-fin/react-openfin-scripts.git"
+  },
+  "keywords": [
+    "openfin",
+    "react",
+    "albert"
+  ],
+  "author": "Wentao Li <liwentao90@yahoo.com>",
+  "license": "MIT"
+}
