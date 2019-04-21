@@ -1,3 +1,11 @@
+// @remove-on-eject-begin
+/**
+ * Copyright (c) 2019-present, Wentao Li.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+// @remove-on-eject-end
 'use strict';
 
 const path = require('path');
@@ -65,43 +73,56 @@ const resolveModule = (resolveFn, filePath) => {
     return resolveFn(`${filePath}.js`);
 };
 
-const hasTSConfig = fs.existsSync(resolveApp('tsconfig.json'));
-const hasTSConfigProd = fs.existsSync(resolveApp('tsconfig.prod.json'));
-const hasTSLint = fs.existsSync(resolveApp('tslint.json'));
-const hasTSLintProd = fs.existsSync(resolveApp('tslint.prod.json'));
-const isTypeScript = hasTSConfig;
-
 // config after eject: we're in ./config/
 module.exports = {
     dotenv: resolveApp('.env'),
     appPath: resolveApp('.'),
     appBuild: resolveApp('build'),
-    appOpenfin:resolveApp('openfin'),
-    appScript:resolveApp('scripts'),
     appPublic: resolveApp('public'),
     appHtml: resolveApp('public/index.html'),
     appIndexJs: resolveModule(resolveApp, 'src/index'),
     appPackageJson: resolveApp('package.json'),
     appSrc: resolveApp('src'),
+    appTsConfig: resolveApp('tsconfig.json'),
+    appTsLint: resolveApp('tslint.json'),
+    appJsConfig: resolveApp('jsconfig.json'),
     yarnLockFile: resolveApp('yarn.lock'),
     testsSetup: resolveModule(resolveApp, 'src/setupTests'),
     proxySetup: resolveApp('src/setupProxy.js'),
     appNodeModules: resolveApp('node_modules'),
-    appTSConfig: resolveApp('tsconfig.json'),
-    appTSConfigProd: resolveApp('tsconfig.prod.json'),
-    appTSLint: resolveApp('tslint.json'),
-    appTSLintProd: resolveApp('tslint.prod.json'),
     publicUrl: getPublicUrl(resolveApp('package.json')),
     servedPath: getServedPath(resolveApp('package.json')),
-    // for typescript etc
-    isTypeScript,
-    useTSConfigProd:isTypeScript && hasTSConfigProd,
-    useTSLint:isTypeScript && hasTSLint,
-    useTSLintProd: isTypeScript && hasTSLintProd,
 };
 
-module.exports.useYarn = fs.existsSync(
-    path.join(module.exports.appPath, 'yarn.lock')
-);
+// @remove-on-eject-begin
+const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
+
+// config before eject: we're in ./node_modules/react-scripts/config/
+module.exports = {
+    dotenv: resolveApp('.env'),
+    appPath: resolveApp('.'),
+    appBuild: resolveApp('build'),
+    appPublic: resolveApp('public'),
+    appHtml: resolveApp('public/index.html'),
+    appIndexJs: resolveModule(resolveApp, 'src/index'),
+    appPackageJson: resolveApp('package.json'),
+    appSrc: resolveApp('src'),
+    appTsConfig: resolveApp('tsconfig.json'),
+    appTsLint: resolveApp('tslint.json'),
+    appJsConfig: resolveApp('jsconfig.json'),
+    yarnLockFile: resolveApp('yarn.lock'),
+    testsSetup: resolveModule(resolveApp, 'src/setupTests'),
+    proxySetup: resolveApp('src/setupProxy.js'),
+    appNodeModules: resolveApp('node_modules'),
+    publicUrl: getPublicUrl(resolveApp('package.json')),
+    servedPath: getServedPath(resolveApp('package.json')),
+    // These properties only exist before ejecting:
+    ownPath: resolveOwn('.'),
+    ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
+    appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
+    ownTypeDeclarations: resolveOwn('lib/react-openfin-app.d.ts'),
+};
+
+// @remove-on-eject-end
 
 module.exports.moduleFileExtensions = moduleFileExtensions;
