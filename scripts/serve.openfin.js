@@ -11,7 +11,6 @@ process.env.REACT_APP_ENV = 'production';
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
-const paths = require('../config/paths');
 const spawn = require('child_process').spawn;
 const chalk = require('chalk');
 const log = console.log;
@@ -25,7 +24,7 @@ let expressServer = null;
 
 async function startServer() {
     const env = Object.create(process.env);
-    expressServer = spawn( 'node',[paths.appScript+'/server.js'], env );
+    expressServer = spawn( 'node',[require.resolve('./serve.js')], env );
     expressServer.stdout.on('data',(data)=>{
         log(chalk.cyan(Buffer.from(data,'binary').toString()));
     });
@@ -44,7 +43,7 @@ async function startServer() {
 
 async function launchApp(){
     const fin = await connect({
-        uuid:'openfin_react_ts_starter',
+        uuid:process.env.REACT_APP_FIN_UUID+'_app',
         runtime:{
             version: process.env.HADOUKEN_VERSION,
         }
@@ -52,8 +51,8 @@ async function launchApp(){
     const version = await fin.System.getVersion();
     log(chalk.green("Connected to Hadouken version", version));
 
-    const app = await fin.Application.create({
-        "name":"Openfin starter",
+    const app = await fin.Application.start({
+        "name":`${process.env.REACT_APP_FIN_NAME}`,
         "url":`http://localhost:${DEFAULT_PORT}/index.html`,
         "uuid":process.env.REACT_APP_FIN_UUID,
         "applicationIcon":`http://localhost:${DEFAULT_PORT}/favicon.ico`,
@@ -77,8 +76,6 @@ async function launchApp(){
         }
         process.exit(0);
     });
-
-    await app.run();
 }
 
 startServer();
