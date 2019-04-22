@@ -24,7 +24,7 @@ const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 let webDevServer = null;
 
 async function startWebpackDevServer() {
-    webDevServer = spawn('node',[paths.appScript+'/start.js']);
+    webDevServer = spawn('node',[require.resolve('./start.js')]);
     webDevServer.stdout.on('data',(data)=>{
         log(chalk.cyan(Buffer.from(data,'binary').toString()));
     });
@@ -38,7 +38,7 @@ async function startWebpackDevServer() {
 
 async function launchApp(){
     const fin = await connect({
-        uuid:'openfin_react_ts_starter',
+        uuid:process.env.REACT_APP_FIN_UUID,
         runtime:{
             version: process.env.HADOUKEN_VERSION,
             arguments:"--v=1 --remote-debugging-port=9090 --enable-crash-reporting"
@@ -48,7 +48,7 @@ async function launchApp(){
     log(chalk.green("Connected to Hadouken version", version));
 
     const app = await fin.Application.create({
-        "name":"Openfin starter [dev]",
+        "name":`${process.env.REACT_APP_FIN_NAME} [dev]`,
         "url":`http://localhost:${DEFAULT_PORT}/index.html`,
         "uuid":process.env.REACT_APP_FIN_UUID,
         "applicationIcon":`http://localhost:${DEFAULT_PORT}/favicon.ico`,

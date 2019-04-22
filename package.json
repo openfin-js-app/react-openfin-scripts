@@ -1,6 +1,6 @@
 {
   "name": "react-openfin-scripts",
-  "version": "0.20.27-beta",
+  "version": "0.20.30-beta",
   "description": "Configuration and scripts for Openfin React App.",
   "scripts": {
     "release-staging": "npm publish . --registry=https://albertli.ddns.net:9004/repository/npm-private/"
@@ -108,6 +108,9 @@
     "@types/react-dom": "^16.8.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "optionalDependencies": {
+    "fsevents": "2.0.6"
   },
   "repository": {
     "type": "git",
