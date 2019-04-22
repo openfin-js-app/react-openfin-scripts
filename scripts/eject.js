@@ -209,7 +209,7 @@ inquirer
         delete appPackage.scripts['eject'];
         Object.keys(appPackage.scripts).forEach(key => {
             Object.keys(ownPackage.bin).forEach(binKey => {
-                const regex = new RegExp(binKey + ' (\\w+)', 'g');
+                const regex = new RegExp(binKey + ' ([a-zA-Z0-9_.]+)', 'g');
                 if (!regex.test(appPackage.scripts[key])) {
                     return;
                 }
@@ -219,7 +219,7 @@ inquirer
                 );
                 console.log(
                     `  Replacing ${cyan(`"${binKey} ${key}"`)} with ${cyan(
-                        `"node scripts/${key}.js"`
+                        appPackage.scripts[key]
                     )}`
                 );
             });

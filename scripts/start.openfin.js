@@ -11,7 +11,6 @@ process.env.REACT_APP_ENV = 'development';
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
-const paths = require('../config/paths');
 const spawn = require('child_process').spawn;
 const chalk = require('chalk');
 const log = console.log;
@@ -38,7 +37,7 @@ async function startWebpackDevServer() {
 
 async function launchApp(){
     const fin = await connect({
-        uuid:process.env.REACT_APP_FIN_UUID,
+        uuid:process.env.REACT_APP_FIN_UUID+'_app',
         runtime:{
             version: process.env.HADOUKEN_VERSION,
             arguments:"--v=1 --remote-debugging-port=9090 --enable-crash-reporting"
@@ -47,7 +46,7 @@ async function launchApp(){
     const version = await fin.System.getVersion();
     log(chalk.green("Connected to Hadouken version", version));
 
-    const app = await fin.Application.create({
+    const app = await fin.Application.start({
         "name":`${process.env.REACT_APP_FIN_NAME} [dev]`,
         "url":`http://localhost:${DEFAULT_PORT}/index.html`,
         "uuid":process.env.REACT_APP_FIN_UUID,
@@ -72,8 +71,6 @@ async function launchApp(){
         }
         process.exit(0);
     });
-
-    await app.run();
 }
 
 
