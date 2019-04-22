@@ -32,9 +32,10 @@ module.exports = (resolve, rootDir, isEjecting) => {
         ],
 
         setupFiles: [
-            isEjecting
-                ? 'react-app-polyfill/jsdom'
-                : require.resolve('react-app-polyfill/jsdom'),
+            // isEjecting
+            //     ? 'react-app-polyfill/jsdom'
+            //     : require.resolve('react-app-polyfill/jsdom'),
+            require.resolve('../../config/polyfills.js'),
             require.resolve('../../config/jest/setupTests.js'),
             require.resolve('../../config/jest/jestMockUps.js'),
         ],

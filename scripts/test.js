@@ -106,7 +106,7 @@ function resolveJestDefaultEnvironment(name) {
   });
 }
 let cleanArgv = [];
-let env = 'jsdom';
+let env = 'jest-environment-jsdom-global';
 let next;
 do {
   next = argv.shift();
