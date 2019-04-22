@@ -19,6 +19,7 @@ const chalk = require('chalk');
 const fse = require('fs-extra');
 const log = console.log;
 const path = require('path');
+const paths = require('../config/paths');
 const shell = require('shelljs');
 const { exec } = require('pkg');
 
@@ -40,7 +41,7 @@ if(platform==='darwin'){
 const target = `node10-${platform}-${process.env.STANDALONE_TARGET_PLATFORM}`;
 
 const createPackageFile = async () => {
-    const packageData = await fse.readFile(path.resolve(__dirname,'../package.json'),'utf-8');
+    const packageData = await fse.readFile(paths.appPackageJson,'utf-8');
     const {scripts, devDependencies, jest, pkg, ...packageDataOther} = JSON.parse(packageData);
 
     const newPackageData = {
@@ -48,7 +49,7 @@ const createPackageFile = async () => {
         private:false,
     };
 
-    const buildPath = path.resolve(__dirname,'../package/package.json');
+    const buildPath = path.resolve(paths.appPath,'package/package.json');
 
     await fse.writeFile(buildPath,JSON.stringify(newPackageData,null,2),'utf8');
     log(chalk.green(`Created package.json in ${buildPath}`));
@@ -62,18 +63,22 @@ const buildBinary = async (script,name)=>{
 };
 
 const build = async() => {
-    await buildBinary('scripts/server.js',`package/${process.env.STANDALONE_SERVER_NAME}`);
-    await buildBinary('scripts/standalone.openfin.js',`package/${process.env.STANDALONE_NAME}`);
+    await buildBinary(require.resolve('./serve.js'),path.resolve(paths.appPath,`package/${process.env.STANDALONE_SERVER_NAME}`));
+    await buildBinary(require.resolve('./standalone.openfin.js'),path.resolve(paths.appPath,`package/${process.env.STANDALONE_NAME}`));
 };
 
 
+const BUILD_DIRECTORY = path.resolve(paths.appPath,'build');
+const TAGET_DIRECTORY = path.resolve(paths.appPath,'package');
 log(chalk.green('TARGET',target));
+log(chalk.green('BUILD_DIRECTORY',BUILD_DIRECTORY));
+log(chalk.green('TAGET_DIRECTORY',TAGET_DIRECTORY));
 log(chalk.green('PWD',shell.pwd()));
 
-shell.mkdir('package');
-shell.cp('.env','package');
-shell.cp(`.env.${process.env.REACT_APP_ENV}`,'package');
-shell.cp('-R','build','package');
+shell.mkdir(path.resolve(paths.appPath,'package'));
+shell.cp(path.resolve(paths.appPath,'.env'),TAGET_DIRECTORY);
+shell.cp(path.resolve(paths.appPath,`.env.${process.env.REACT_APP_ENV}`),TAGET_DIRECTORY);
+shell.cp('-R',BUILD_DIRECTORY,TAGET_DIRECTORY);
 createPackageFile();
 
 // pkg scripts/server.js --target node10-linux-x64 --output openfin_starter_server

@@ -43,7 +43,7 @@ async function startServer() {
 
 async function launchApp(){
     const fin = await connect({
-        uuid:'openfin_react_ts_starter',
+        uuid:process.env.REACT_APP_FIN_UUID+'_app',
         runtime:{
             version: process.env.HADOUKEN_VERSION,
         }
@@ -51,8 +51,8 @@ async function launchApp(){
     const version = await fin.System.getVersion();
     log(chalk.green("Connected to Hadouken version", version));
 
-    const app = await fin.Application.create({
-        "name":"Openfin starter",
+    const app = await fin.Application.start({
+        "name":`${process.env.REACT_APP_FIN_NAME}`,
         "url":`http://localhost:${DEFAULT_PORT}/index.html`,
         "uuid":process.env.REACT_APP_FIN_UUID,
         "applicationIcon":`http://localhost:${DEFAULT_PORT}/favicon.ico`,
@@ -77,8 +77,6 @@ async function launchApp(){
         }
         process.exit(0);
     });
-
-    await app.run();
 }
 
 startServer();
