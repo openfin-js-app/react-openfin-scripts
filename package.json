@@ -1,6 +1,6 @@
 {
   "name": "react-openfin-scripts",
-  "version": "0.20.40-beta",
+  "version": "0.40.20",
   "description": "Configuration and scripts for Openfin React App.",
   "scripts": {
     "release-staging": "npm publish . --registry=https://albertli.ddns.net:9004/repository/npm-private/"
@@ -112,7 +112,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@albertli.ddns.net:open-fin/react-openfin-scripts.git"
+    "url": "git@github.com:openfin-js-app/react-openfin-scripts.git"
   },
   "keywords": [
     "openfin",
