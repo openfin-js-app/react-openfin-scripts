@@ -30,15 +30,21 @@ module.exports = (resolve, rootDir, isEjecting) => {
             "!src/i18n.ts",
             "!src/index.tsx"
         ],
-
-        setupFiles: [
-            // isEjecting
-            //     ? 'react-app-polyfill/jsdom'
-            //     : require.resolve('react-app-polyfill/jsdom'),
-            require.resolve('../../config/polyfills.js'),
-            require.resolve('../../config/jest/setupTests.js'),
-            require.resolve('../../config/jest/jestMockUps.js'),
-        ],
+        setupFiles:
+            isEjecting?
+            [
+                // 'react-app-polyfill/jsdom',
+                "<rootDir>/config/polyfills.js",
+                "<rootDir>/config/jest/setupTests.js",
+                "<rootDir>/config/jest/jestMockUps.js",
+            ]:
+            [
+                // require.resolve('react-app-polyfill/jsdom'),
+                require.resolve('../../config/polyfills.js'),
+                require.resolve('../../config/jest/setupTests.js'),
+                require.resolve('../../config/jest/jestMockUps.js'),
+            ]
+        ,
         // feel like jest complains about the setupFilesAfterEnv
         // setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
         testMatch: [
@@ -52,10 +58,9 @@ module.exports = (resolve, rootDir, isEjecting) => {
             "<rootDir>/src"
         ],
         "globals": {},
-        testEnvironment: 'jest-environment-jsdom-global',
         transform: {
             '^.+\\.(js|jsx|ts|tsx)$': isEjecting
-                ? '<rootDir>/node_modules/ts-jest'
+                ? '<rootDir>/node_modules/babel-jest'
                 : resolve('config/jest/babelTransform.js'),
             '^.+\\.css$': resolve('config/jest/cssTransform.js'),
             '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve(
