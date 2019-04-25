@@ -7,7 +7,7 @@
  */
 // @remove-on-eject-end
 
-process.env.REACT_APP_ENV = 'production';
+// process.env.REACT_APP_ENV = 'production';
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
@@ -24,7 +24,8 @@ let expressServer = null;
 
 
 async function startServer() {
-    expressServer = execFile(process.cwd()+`/${process.env.STANDALONE_SERVER_NAME}`);
+    const env = Object.create(process.env);
+    expressServer = execFile(process.cwd()+`/${process.env.STANDALONE_SERVER_NAME}`,[],{env:env});
     expressServer.stdout.on('data',(data)=>{
         log(chalk.cyan(Buffer.from(data,'binary').toString()));
     });
