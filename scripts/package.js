@@ -7,7 +7,7 @@
  */
 // @remove-on-eject-end
 
-process.env.REACT_APP_ENV = 'production';
+// process.env.REACT_APP_ENV = 'production';
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
@@ -55,7 +55,7 @@ const createPackageFile = async () => {
     log(chalk.green(`Created package.json in ${buildPath}`));
 
     return newPackageData;
-}
+};
 
 
 const buildBinary = async (script,name)=>{

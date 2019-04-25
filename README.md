@@ -45,5 +45,5 @@ Package the app into binary and put to package folder.<br>
 [LICENSE]: ./LICENSE.md
 [CHANGELOG]: ./CHANGELOG.md
 
-[version-badge]: https://img.shields.io/badge/version-0.40.20-blue.svg
+[version-badge]: https://img.shields.io/badge/version-0.40.40-blue.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
