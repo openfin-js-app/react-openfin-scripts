@@ -8,12 +8,14 @@
  */
 // @remove-on-eject-end
 
-process.env.REACT_APP_ENV = 'production';
+// process.env.REACT_APP_ENV = 'production';
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
 require('../config/env');
 
+const chalk = require('chalk');
+const fs = require('fs');
 const express = require('express');
 const logger = require('morgan');
 const http = require('http');
@@ -28,6 +30,11 @@ const {
 
 const app = express();
 
+if (!fs.existsSync(paths.appBuild + '/index.html')){
+    console.log(chalk.red(`fatal error: ${paths.appBuild}/index.html cannot be found`));
+    throw new Error(`${paths.appBuild}/index.html cannot be found`);
+}
+
 app.use(logger('dev'));
 app.use(configApis);
 app.use(express.static(paths.appBuild));
@@ -41,7 +48,7 @@ app.use((req,res,next)=>{
         if(req.accepts('json')){
             res.send({error:'Not found'});
         }
-        res.type('txt'),send('Not found');
+        res.type('txt').send('Not found');
     }
 });
 

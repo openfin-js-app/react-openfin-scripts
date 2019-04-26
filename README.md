@@ -27,10 +27,16 @@ The build is minified and the filenames include the hashes.<br>
 
 Your app is ready to be deployed.
 
+If the index.html were not found in the app build folder, 
+an exception will be thrown and the whole process then exits with 1
+
 ### `npm serve` or `yarn serve`
 
 Servers the app from built folder.<br>
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+If the index.html were not found in the app build folder, 
+an exception will be thrown and the whole process then exits with 1
 
 ### `npm serve-openfin` or `yarn serve-openfin`
 
@@ -41,9 +47,15 @@ Meanwhile also start a openfin connection to loaded built codes.
 
 Package the app into binary and put to package folder.<br>
 
+### `REACT_APP_ENV` the profile environment variable
+
+Instead of using `NODE_ENV`, react-openfin-scripts will use `REACT_APP_ENV` to load dot env profiles.
+
+Moreover, even if `REACT_APP_ENV` is undefined, react-openfin-scripts will directly use production by default.    
+
 
 [LICENSE]: ./LICENSE.md
 [CHANGELOG]: ./CHANGELOG.md
 
-[version-badge]: https://img.shields.io/badge/version-0.40.20-blue.svg
+[version-badge]: https://img.shields.io/badge/version-0.40.40-blue.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
