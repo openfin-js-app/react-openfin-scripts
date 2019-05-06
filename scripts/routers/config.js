@@ -12,6 +12,9 @@ const router = express.Router();
 const chalk = require('chalk');
 const log = console.log;
 
+const company = process.env.REACT_APP_FIN_COMPANY?process.env.REACT_APP_FIN_COMPANY:"Albert Leigh Corp";
+const desc = process.env.REACT_APP_FIN_DESC?process.env.REACT_APP_FIN_DESC:"Openfin starter of production profile";
+
 const {
     normalizePort,
 } = require('../utils/serverUtils');
@@ -49,7 +52,7 @@ router.get('/app.json',(req,res)=>{
 
     res.json({
             "startup_app":{
-                "name":"Openfin starter",
+                "name":`${process.env.REACT_APP_FIN_NAME}`,
                 "url":`${baseUrl}index.html`,
                 "uuid":process.env.REACT_APP_FIN_UUID,
                 "applicationIcon":`${baseUrl}favicon.ico`,
@@ -69,10 +72,10 @@ router.get('/app.json',(req,res)=>{
                 "arguments":"--v=1 --remote-debugging-port=9090 --enable-crash-reporting"
             },
             "shortcut":{
-                "company":"Albert Leigh Corp",
-                "description":"Openfin starter of production profile",
+                "company":company,
+                "description":desc,
                 "icon":`${baseUrl}favicon.ico`,
-                "name":"Openfin starter kit",
+                "name":`${process.env.REACT_APP_FIN_NAME}`,
                 "diagnostics-shortcut":true
             }
         }
