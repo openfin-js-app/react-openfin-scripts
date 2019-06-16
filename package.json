@@ -1,12 +1,11 @@
 {
   "name": "react-openfin-scripts",
-  "version": "0.90.3-beta",
+  "version": "1.0.0-beta.27",
   "description": "Configuration and scripts for Openfin React App.",
   "homepage": "https://www.albertli90.com/openfin-react-latest",
   "keywords": [
     "openfin",
     "react",
-    "scripts",
     "albert"
   ],
   "scripts": {
@@ -133,11 +132,6 @@
     "type": "git",
     "url": "git@github.com:openfin-js-app/react-openfin-scripts.git"
   },
-  "keywords": [
-    "openfin",
-    "react",
-    "albert"
-  ],
   "author": "Wentao Li <liwentao90@yahoo.com>",
   "license": "MIT"
 }
