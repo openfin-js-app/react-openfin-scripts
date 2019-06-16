@@ -57,5 +57,5 @@ Moreover, even if `REACT_APP_ENV` is undefined, react-openfin-scripts will direc
 [LICENSE]: ./LICENSE.md
 [CHANGELOG]: ./CHANGELOG.md
 
-[version-badge]: https://img.shields.io/badge/version-0.90.20-blue.svg
+[version-badge]: https://img.shields.io/badge/version-1.0.0-blue.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
