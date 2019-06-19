@@ -48,7 +48,9 @@ router.get('/app.json',(req,res)=>{
         }
     }
 
-    // log(chalk.cyan('baseUrl',baseUrl));
+    log(chalk.cyan('[react-openfin-scripts] config api 1#::',process.env.PUBLIC_URL));
+    log(chalk.cyan('[react-openfin-scripts] config api 2#::',JSON.stringify(req)));
+    log(chalk.cyan('baseUrl',baseUrl));
 
     res.json({
             "startup_app":{
@@ -69,7 +71,7 @@ router.get('/app.json',(req,res)=>{
             },
             "runtime":{
                 "version":`${process.env.HADOUKEN_VERSION}`,
-                "arguments":"--v=1 --remote-debugging-port=9090 --enable-crash-reporting"
+                "arguments":"--v=1"
             },
             "shortcut":{
                 "company":company,
