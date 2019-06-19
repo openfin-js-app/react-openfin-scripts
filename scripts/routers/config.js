@@ -71,7 +71,7 @@ router.get('/app.json',(req,res)=>{
             },
             "runtime":{
                 "version":`${process.env.HADOUKEN_VERSION}`,
-                "arguments":"--v=1"
+                "arguments":"--v=1 --enable-crash-reporting"
             },
             "shortcut":{
                 "company":company,
