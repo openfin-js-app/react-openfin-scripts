@@ -49,7 +49,9 @@ router.get('/app.json',(req,res)=>{
     }
 
     log(chalk.cyan('[react-openfin-scripts] config api 1#::',process.env.PUBLIC_URL));
-    log(chalk.cyan('[react-openfin-scripts] config api 2#::',JSON.stringify(req)));
+    log(chalk.cyan('[react-openfin-scripts] config api 2# originalUrl::',req.originalUrl));
+    log(chalk.cyan('[react-openfin-scripts] config api 3# url::',req.url));
+    log(chalk.cyan('[react-openfin-scripts] config api 4# protocol::',req.protocol));
     log(chalk.cyan('baseUrl',baseUrl));
 
     res.json({
