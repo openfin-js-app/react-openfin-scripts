@@ -52,6 +52,14 @@ router.get('/app.json',(req,res)=>{
     log(chalk.cyan('[react-openfin-scripts] config api 2# originalUrl::',req.originalUrl));
     log(chalk.cyan('[react-openfin-scripts] config api 3# url::',req.url));
     log(chalk.cyan('[react-openfin-scripts] config api 4# protocol::',req.protocol));
+    log(chalk.cyan('[react-openfin-scripts] config api 5# Host::',req.header['Host']));
+    log(chalk.cyan('[react-openfin-scripts] config api 6# X-Real-IP::',req.header['X-Real-IP']));
+    log(chalk.cyan('[react-openfin-scripts] config api 7# X-Forwarded-For::',req.header['X-Forwarded-For']));
+    log(chalk.cyan('[react-openfin-scripts] config api 8# X-Client-Verify::',req.header['X-Client-Verify']));
+    log(chalk.cyan('[react-openfin-scripts] config api 9# X-Client-DN::',req.header['X-Client-DN']));
+    log(chalk.cyan('[react-openfin-scripts] config api 10# X-SSL-Subject::',req.header['X-SSL-Subject']));
+    log(chalk.cyan('[react-openfin-scripts] config api 11# X-SSL-Issuer::',req.header['X-SSL-Issuer']));
+    log(chalk.cyan('[react-openfin-scripts] config api 12# some-other::',req.header['some-other']));
     log(chalk.cyan('baseUrl',baseUrl));
 
     res.json({
