@@ -1,3 +1,5 @@
+## [1.1.0] 2019-06-18
+- Support and consume PUBLIC_URL from process.env
 ## [1.0.0] 2019-06-16
 - Update dependencies to
     - create-react-app @ 3.0.1

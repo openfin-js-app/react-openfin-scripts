@@ -36,26 +36,35 @@ router.get('/app.json',(req,res)=>{
         baseUrl+=req.originalUrl.substr(0,req.originalUrl.indexOf('app.json'));
     }
 
-    if (!baseUrl.endsWith('/')){
-        baseUrl+='/';
+    if (
+        process.env.PUBLIC_URL &&
+        process.env.PUBLIC_URL.indexOf('/') === 0 &&
+        process.env.PUBLIC_URL.length > 1
+    ){
+        baseUrl+=process.env.PUBLIC_URL;
     }
 
+
     if (!baseUrl.startsWith('http')){
-        if (req.connection.secure){
+        if (
+            req.connection.secure ||
+            (
+                process.env.SSL_CONN &&
+                process.env.SSL_CONN.toLowerCase() === 'true'
+            )
+        ){
             baseUrl = 'https://'+baseUrl;
         }else{
             baseUrl = 'http://'+baseUrl;
         }
     }
 
-    // log(chalk.cyan('baseUrl',baseUrl));
-
     res.json({
             "startup_app":{
                 "name":`${process.env.REACT_APP_FIN_NAME}`,
-                "url":`${baseUrl}index.html`,
+                "url":`${baseUrl}/index.html`,
                 "uuid":process.env.REACT_APP_FIN_UUID,
-                "applicationIcon":`${baseUrl}favicon.ico`,
+                "applicationIcon":`${baseUrl}/favicon.ico`,
                 "autoShow":false,
                 "saveWindowsSate":false,
                 "resizable":true,
@@ -69,12 +78,12 @@ router.get('/app.json',(req,res)=>{
             },
             "runtime":{
                 "version":`${process.env.HADOUKEN_VERSION}`,
-                "arguments":"--v=1 --remote-debugging-port=9090 --enable-crash-reporting"
+                "arguments":"--v=1 --enable-crash-reporting"
             },
             "shortcut":{
                 "company":company,
                 "description":desc,
-                "icon":`${baseUrl}favicon.ico`,
+                "icon":`${baseUrl}/favicon.ico`,
                 "name":`${process.env.REACT_APP_FIN_NAME}`,
                 "diagnostics-shortcut":true
             }
