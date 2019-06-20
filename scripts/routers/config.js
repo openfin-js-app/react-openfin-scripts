@@ -36,13 +36,22 @@ router.get('/app.json',(req,res)=>{
         baseUrl+=req.originalUrl.substr(0,req.originalUrl.indexOf('app.json'));
     }
 
-    if (process.env.PUBLIC_URL.indexOf('/') === 0){
+    if (
+        process.env.PUBLIC_URL &&
+        process.env.PUBLIC_URL.indexOf('/') === 0
+    ){
         baseUrl+=process.env.PUBLIC_URL;
     }
 
 
     if (!baseUrl.startsWith('http')){
-        if (req.connection.secure || process.env.SSL_CONN.toLowerCase() === 'true'){
+        if (
+            req.connection.secure ||
+            (
+                process.env.SSL_CONN &&
+                process.env.SSL_CONN.toLowerCase() === 'true'
+            )
+        ){
             baseUrl = 'https://'+baseUrl;
         }else{
             baseUrl = 'http://'+baseUrl;
