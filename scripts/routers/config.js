@@ -38,7 +38,8 @@ router.get('/app.json',(req,res)=>{
 
     if (
         process.env.PUBLIC_URL &&
-        process.env.PUBLIC_URL.indexOf('/') === 0
+        process.env.PUBLIC_URL.indexOf('/') === 0 &&
+        process.env.PUBLIC_URL.length > 0
     ){
         baseUrl+=process.env.PUBLIC_URL;
     }
